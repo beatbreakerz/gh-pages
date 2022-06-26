@@ -72,7 +72,7 @@ if (!fs.existsSync(CACHE_PATH)) {
 log.setLevel(log.levels.INFO);
 
 // From commander examples
-function myParseInt(value) {
+function myParseInt(value:string) {
   // parseInt takes a string and a radix
   const parsedValue = parseInt(value, 10);
   if (isNaN(parsedValue)) {
@@ -222,11 +222,11 @@ programCommand('upload')
     // Filter out any non-supported file types and find the JSON vs Image file count
     const supportedFiles = files.filter(it => {
       if (supportedImageTypes[getType(it)]) {
-        imageFileCount++;
+        imageFileCount ++;
       } else if (supportedAnimationTypes[getType(it)]) {
-        animationFileCount++;
+        animationFileCount ++;
       } else if (it.endsWith(EXTENSION_JSON)) {
-        jsonFileCount++;
+        jsonFileCount ++;
       } else {
         log.warn(`WARNING: Skipping unsupported file type ${it}`);
         return false;
