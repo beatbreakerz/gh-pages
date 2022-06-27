@@ -199,7 +199,8 @@ module.exports = function (webpackEnv) {
       pathinfo: isEnvDevelopment,
       // There will be one main bundle, and one file per asynchronous chunk.
       // In development, it does not produce real files.
-      filename: isEnvProduction,
+      filename: isEnvProduction ?
+          'static/js/bundle.min.js'  : isEnvDevelopment && 'static/js/bundle.js',
       futureEmitAssets: true,
       // There are also additional JS chunk files if you use code splitting
       // webpack uses `publicPath` to determine where the app is being served from.
@@ -265,10 +266,10 @@ module.exports = function (webpackEnv) {
           },
           sourceMap: shouldUseSourceMap,
         }),
-        new webpack.optimize.LimitChunkCountPlugin({ maxCHUNKS :1 }),
+        new webpack.optimize.LimitChunkCountPlugin({ }),
         // This is only used in production mode
         new OptimizeCSSAssetsPlugin({
-          cssProcessorOptions: {
+            cssProcessorOptions: {
             parser: safePostCssParser,
             map: shouldUseSourceMap
               ? {
